@@ -5,69 +5,88 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# NestJS Monorepo Project Boilerplate
 
-## Installation
+This is a NestJS monorepo project boilerplate that provides a solid foundation for building scalable and maintainable applications. The [monorepo](https://docs.nestjs.com/cli/monorepo) structure allows for easy code sharing and reusability across multiple projects. The structure focuses on the use case of a Bookstore where we want to keep NestJS two separate APIs: one for a bookstore and another for employees of the bookstore. The purpose of this boilerplate is to keep the two APIs separate, while also providing a NestJS library to share common modules such as authentication and user management.
 
-```bash
-$ pnpm install
+## Getting Started
+
+To get started with this project, follow these steps:
+
+1. Clone the repository to your local machine
+2. Install the necessary dependencies by running `pnpm install` in the root directory of the project (notice that the seput is using `pnpm` instead of `npm` or `yarn`
+
+## Project Structure
+
+This project is structured as a monorepo, with the following directories:
+
+- apps/bookstore-api: This directory contains the code for the API that serves the bookstore.
+- apps/employee-api: This directory contains the code for the API that serves the employees of the bookstore.
+- libs/authentication: This directory contains the code for the NestJS library that should provide common modules for authentication
+- libs/users: This directory contains the code for the NestJS library that should provide common modules for users
+
+Refer to the following visual organisation for clarity. Also, consider that this architectural approach is based on the official NestJS [documentation](https://docs.nestjs.com/cli/monorepo).
+
+```
+nestjs-monorepo/
+├─ node_modules/
+├─ apps/
+│  ├─ bookstore-api/
+│  │  ├─ src
+│  │  ├─ test
+│  ├─ employees-api/
+│  │  ├─ src
+│  │  ├─ test
+├─ libs/
+│  ├─ auth/
+│  ├─ users/
+├─ .gitignore
+├─ package.json
+├─ nest-cli.json
+├─ README.md
 ```
 
-## Running the app
+## Running the APIs
 
-```bash
-# development
-$ pnpm run start
+To run the APIs, follow these steps:
 
-# watch mode
-$ pnpm run start:dev
+1. Navigate to the apps/bookstore-api directory
+2. Start the server by running npm run start:dev
+3. Navigate to the apps/employee-api directory
+4. Start the server by running npm run start:dev
 
-# production mode
-$ pnpm run start:prod
-```
+## Using the Common Library
 
-## Test
+To use the common library in either of the APIs, follow these steps:
 
-```bash
-# unit tests
-$ pnpm run test
+1. Import the necessary modules from the @app/* package
+2. Use the imported modules in your code
+For example, to use the authentication module in the apps/bookstore-api API, you would do the following:
 
-# e2e tests
-$ pnpm run test:e2e
+typescript
+import { AuthModule } from '@bookstore/common';
 
-# test coverage
-$ pnpm run test:cov
-```
+@Module({
+  imports: [AuthModule],
+  controllers: [BookstoreController],
+  providers: [BookstoreService],
+})
+export class BookstoreModule {}
 
-## Support
+## Contributing
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+If you would like to contribute to this project, please follow these steps:
+1. Fork the repository
+2. Create a new branch for your changes
+3. Make your changes and commit them to your branch
+4. Push your changes to your forked repository
+5. Create a pull request to merge your changes into the main repository
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-Nest is [MIT licensed](LICENSE).
