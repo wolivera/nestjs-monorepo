@@ -67,7 +67,7 @@ To use the common library in either of the APIs, follow these steps:
 2. Use the imported modules in your code
 For example, to use the authentication module in the apps/bookstore-api API, you would do the following:
 
-typescript
+```typescript
 import { AuthModule } from '@bookstore/common';
 
 @Module({
@@ -76,6 +76,7 @@ import { AuthModule } from '@bookstore/common';
   providers: [BookstoreService],
 })
 export class BookstoreModule {}
+```
 
 ## Contributing
 
